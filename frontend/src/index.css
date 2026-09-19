@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Neutral ink scale — warm dark terminal surfaces */
+  --color-ink-950: #08090c;
+  --color-ink-900: #0b0d11;
+  --color-ink-880: #0e1116;
+  --color-ink-850: #111419;
+  --color-ink-800: #151920;
+  --color-ink-750: #1a1f27;
+  --color-ink-700: #212832;
+  --color-ink-650: #2a323d;
+  --color-ink-600: #39424e;
+
+  /* Text */
+  --color-fog-100: #eef2f6;
+  --color-fog-200: #d7dee6;
+  --color-fog-300: #b3bec9;
+  --color-fog-400: #8d99a6;
+  --color-fog-500: #6c7885;
+  --color-fog-600: #55606c;
+
+  /* Gold — brand only */
+  --color-gold-200: #f0dca8;
+  --color-gold-300: #e2c583;
+  --color-gold-400: #cfa95c;
+  --color-gold-500: #b98f3e;
+  --color-gold-600: #8f6c2c;
+
+  /* Financial states */
+  --color-gain-300: #6ee7b7;
+  --color-gain-400: #34d399;
+  --color-gain-500: #16b981;
+  --color-gain-600: #0d7a56;
+  --color-loss-300: #fca5a5;
+  --color-loss-400: #f87171;
+  --color-loss-500: #e2444c;
+  --color-loss-600: #8f2730;
+
+  --color-info-400: #60a5fa;
+  --color-info-500: #3b82f6;
+  --color-warn-400: #f5b544;
+  --color-warn-500: #d99116;
+
+  --shadow-panel: 0 1px 0 rgba(255, 255, 255, 0.02) inset, 0 12px 32px -18px rgba(0, 0, 0, 0.8);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-fog-200);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  ::selection {
+    background: rgba(207, 169, 92, 0.28);
+    color: #fff;
+  }
+
+  /* Scrollbars — subtle, terminal-like */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a323d transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #262e38;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background: #39424e;
+    background-clip: padding-box;
+  }
+}
+
+@layer utilities {
+  .panel {
+    background-color: var(--color-ink-850);
+    border: 1px solid var(--color-ink-700);
+    border-radius: 12px;
+    box-shadow: var(--shadow-panel);
+  }
+
+  .panel-flat {
+    background-color: var(--color-ink-880);
+    border: 1px solid var(--color-ink-700);
+    border-radius: 10px;
+  }
+
+  .hairline {
+    border-color: var(--color-ink-700);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  .gold-text {
+    background: linear-gradient(180deg, #f0dca8 0%, #cfa95c 55%, #b98f3e 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .fade-in {
+    animation: fade-in 0.35s ease-out both;
+  }
+
+  .shimmer {
+    background: linear-gradient(90deg, #171c23 0%, #202732 45%, #171c23 90%);
+    background-size: 220% 100%;
+    animation: shimmer 1.6s linear infinite;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+  100% {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.recharts-surface:focus {
+  outline: none;
+}
+
+.recharts-default-tooltip {
+  border: none !important;
+}
